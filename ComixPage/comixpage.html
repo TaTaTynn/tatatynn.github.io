@@ -1,0 +1,239 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+
+    <script>
+        var bb = false, gb = false, yb=false, pb=false;
+        var color = "";
+        var curr = 0;
+
+        function deleter(h) {
+            document.getElementById(h).remove();
+        }
+
+        function bluebranch() {
+            if (gb == false) {
+                bb = true;
+                color = "blue";
+                deleter("c-1");
+                next();
+            }
+        }
+
+        function greenbranch() {
+            if (bb == false) {
+                gb = true;
+                color = "green";
+                deleter("c-1");
+                next();
+            }
+        }
+
+        function yellowbranch() {
+            if ((gb == true) && (pb == false)) {
+                yb = true;
+                color = "yellow";
+                deleter("c-2");
+                show();
+            }
+        }
+
+        function purplebranch() {
+            if ((gb == true) && (yb == false)) {
+                pb = true;
+                color = "purple";
+                deleter("c-2");
+                show();
+            }
+        }
+
+        /*function previous() {
+            if (curr > 0) curr--;
+            show();
+        }*/
+
+        function next() {
+            curr++;
+            show();
+        }
+
+        function show() {
+
+            switch(curr) {
+                case 0:
+                break;
+
+                case 1:
+                    var fr = document.getElementById("f-2");
+                    fr.src = "2"+color+".png";
+                    break;
+
+                case 2:
+                    var fr = document.getElementById("f-3");
+                    fr.src = "3" + color + ".png";
+                    break;
+
+                case 3:
+                    var fr = document.getElementById("f-4");
+                    fr.src = "4"+color+".gif";
+                    break;
+
+                case 4:
+                    var fr = document.getElementById("f-5");
+                    fr.src = "5pink.png";
+                    break;
+
+                case 5:
+                    var fr = document.getElementById("f-6");
+                    fr.src = "6" + color + ".png";
+                    break;
+
+                case 6:
+                    var fr = document.getElementById("f-7");
+                    fr.src = "7" + color + ".png";
+                    break;
+
+                case 7:
+                    if (color == "green") {
+                        var yp = document.getElementById("c-2")
+                        yp.innerHTML = '<p class="choo" onclick="yellowbranch()">Вариант 1</p>'+
+                                        '<p class="choo" onclick ="purplebranch()">Вариант 2</p>';
+                    }
+
+                    else{
+                        var fr = document.getElementById("f-8");
+                        if (color != "purple") { fr.src = "8" + color + ".png"; }
+                        if (color == "purple") { fr.src = "8purple.gif"; }
+                    }
+                    break;
+
+                case 8:
+                    var fr = document.getElementById("f-9");
+                    fr.src = "9" + color + ".png";
+                    break;
+
+                default:
+                    alert("???");
+            }
+                
+        }
+        
+    </script>
+
+    <style>
+        body{
+           // background-color: darkgrey;
+            text-align:center;
+        }
+
+        .cheet {
+            //width: 800px;
+            //height: 1000px;
+            border: 3px solid white;
+            display: inline-block;
+            text-align:left;
+        }
+
+        .column{
+            display:inline-block;
+            border: 2px solid white;
+            vertical-align:top;
+            text-align: center;
+        }
+
+        .frame{
+           // border: 2px solid red;
+            vertical-align:middle;
+        }
+
+        p{
+            font-family: Bezpredmetizm;
+            font-size:30px;
+            color:black;
+        }
+
+        .choo:hover{
+            color:dimgray;
+        }
+
+        .chooser{
+            position: page;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="cheet">
+
+        <div class="string">
+            <div class="column frame">
+                <img src="1pink.png" />
+            </div>
+
+            <div class="column">
+
+                <div id="c-1" class="chooser">
+                    <div class="string">
+                        <p>Выберите:</p>
+                    </div>
+
+                    <div class="string">
+                        <p class="choo" onclick="bluebranch()">Вариант 1</p>
+                    </div>
+
+                    <div class="string">
+                        <p class="choo" onclick="greenbranch()">Вариант 2</p>
+                    </div>
+                </div>
+
+                <div class="frame">
+                    <img id="f-2" src="" />
+                </div>
+
+                <div class="frame">
+                    <img id="f-3" src="" />
+                </div>
+            </div>
+        </div>
+
+        <div class="string">
+            <div class="column frame">
+                <img id="f-4" src="" />
+            </div>
+
+            <div id="5" class="column frame">
+                <img id="f-5" src="" />
+            </div>
+        </div>
+
+        <div class="string">
+            <div class="column frame">
+                <img id="f-6" src="" />
+            </div>
+
+            <div id="5" class="column frame">
+                <img id="f-7" src="" />
+            </div>
+        </div>
+
+        <div class="string">
+            <div class="column frame">
+                <div id="c-2" class="chooser"></div>
+                <img id="f-8" src="" />
+            </div>
+
+            <div id="5" class="column frame">
+                <img id="f-9" src="" />
+            </div>
+        </div>
+
+        <div class="column frame">
+            <p id="next" class="choo" style="font-size: 50px" onclick="next()">></p>
+        </div>
+    </div>
+        
+</body>
+</html>
